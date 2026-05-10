@@ -2007,14 +2007,14 @@ nav ul li a{
 .gallery-item:nth-child(odd) img,
 .video-card:nth-child(odd) video{
 
-    aspect-ratio:4/5;
+    
 
 }
 
 .gallery-item:nth-child(even) img,
 .video-card:nth-child(even) video{
 
-    aspect-ratio:9/16;
+   
 
 }
 
