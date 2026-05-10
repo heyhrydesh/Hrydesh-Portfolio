@@ -820,12 +820,6 @@ box-shadow:
 inset 0 1px 0 rgba(255,255,255,0.14);
 }
 
-/* REMOVE DEFAULT CURSORS */
-
-*{
-  cursor:none !important;
-}
-
 
 /* HIDE VIDEO CONTROLS */
 
@@ -1571,83 +1565,42 @@ section{
  /* =========================
    PINTEREST GALLERY
 ========================= */
-.gallery-grid{
+.gallery-grid,
+.video-grid{
 
-    column-count:2;
+    columns:2 160px;
 
     column-gap:12px;
 
     padding:0 12px;
 }
 
-.gallery-item{
+.gallery-item,
+.video-card{
 
     break-inside:avoid;
 
     margin-bottom:12px;
-}
-
-.gallery-item img{
-
-    width:100%;
-
-    border-radius:22px;
-
-    display:block;
-}
-
-.video-grid{
-
-    display:grid;
-
-    grid-template-columns:1fr 1fr;
-
-    gap:12px;
-
-    padding:0 12px;
-}
-
-.video-card{
-
-    position:relative;
 
     overflow:hidden;
 
     border-radius:22px;
-
-    aspect-ratio:9/16;
-
-    background:#111;
 }
 
+/* ORIGINAL RATIOS */
+
+.gallery-item img,
 .video-card video{
 
     width:100%;
-    height:100%;
 
-    object-fit:cover;
+    height:auto;
 
     display:block;
-}
 
-/* RANDOM HEIGHT FEEL */
+    border-radius:22px;
 
-.gallery-item:nth-child(3n) img,
-.video-card:nth-child(3n) video{
-    aspect-ratio:9/16;
-    object-fit:cover;
-}
-
-.gallery-item:nth-child(2n) img,
-.video-card:nth-child(2n) video{
-    aspect-ratio:1/1;
-    object-fit:cover;
-}
-
-.gallery-item:nth-child(5n) img,
-.video-card:nth-child(5n) video{
-    aspect-ratio:4/5;
-    object-fit:cover;
+    object-fit:contain;
 }
 
 /* REMOVE BLACK GAPS */
@@ -1988,7 +1941,19 @@ nav ul li a{
     transform:scale(1.04);
 }
 
-/* CURSOR OFF */
+}
+
+@media(min-width:769px){
+
+
+
+.cursor{
+    display:block;
+}
+
+}
+
+@media(max-width:768px){
 
 .cursor{
     display:none;
@@ -1998,4 +1963,41 @@ nav ul li a{
     cursor:auto !important;
 }
 
+}
+
+/* =========================
+   FINAL CURSOR FIX
+========================= */
+
+@media(min-width:769px){
+
+    .cursor{
+        display:block;
+    }
+
+    body{
+        cursor:none;
+    }
+
+}
+
+@media(max-width:768px){
+
+    .cursor{
+        display:none !important;
+    }
+
+    body,
+    *{
+        cursor:auto !important;
+    }
+
+}
+
+/* LIGHTBOX FIX */
+
+.lightbox.active,
+.video-lightbox.active{
+
+    display:flex !important;
 }

@@ -1,256 +1,184 @@
-console.log("JS WORKING");
+console.log("Portfolio JS Loaded");
 
-const text =
+/* =========================
+   TYPING EFFECT
+========================= */
+
+const typingText =
 "Creative AI Developer • Cinematic Editor • Visual Storyteller";
 
-let index = 0;
+const typingElement =
+document.querySelector(".typing");
+
+let typingIndex = 0;
 
 function typeEffect(){
 
-  if(index < text.length){
+    if(typingElement && typingIndex < typingText.length){
 
-    document.querySelector(".typing").innerHTML +=
-    text.charAt(index);
+        typingElement.innerHTML +=
+        typingText.charAt(typingIndex);
 
-    index++;
+        typingIndex++;
 
-    setTimeout(typeEffect,70);
-  }
+        setTimeout(typeEffect, 60);
+    }
 }
 
-if(document.querySelector(".typing")){
+typeEffect();
 
-  typeEffect();
+/* =========================
+   MOBILE NAVBAR
+========================= */
 
+const menuToggle =
+document.querySelector(".menu-toggle");
+
+const navMenu =
+document.querySelector("nav ul");
+
+if(menuToggle && navMenu){
+
+    menuToggle.addEventListener("click", (e) => {
+
+        e.stopPropagation();
+
+        navMenu.classList.toggle("active");
+    });
+
+    document.querySelectorAll("nav ul li a")
+    .forEach(link => {
+
+        link.addEventListener("click", () => {
+
+            navMenu.classList.remove("active");
+        });
+    });
+
+    document.addEventListener("click", (e) => {
+
+        if(
+            !navMenu.contains(e.target) &&
+            !menuToggle.contains(e.target)
+        ){
+
+            navMenu.classList.remove("active");
+        }
+    });
 }
 
-
-// =========================
-// VIDEO INTERACTION
-// =========================
-
-const videos =
-document.querySelectorAll(".video-card video");
-
-videos.forEach(video => {
-
-  // PLAY ON HOVER
-
-  video.addEventListener("mouseenter",()=>{
-
-    // DON'T autoplay fullscreen video
-
-    if(
-      !document
-      .querySelector(".video-lightbox")
-      .classList.contains("active")
-    ){
-
-      video.play();
-
-    }
-
-  });
-
-  // RESET ON LEAVE
-
-  video.addEventListener("mouseleave",()=>{
-
-    // ONLY reset if fullscreen NOT open
-
-    if(
-      !document
-      .querySelector(".video-lightbox")
-      .classList.contains("active")
-    ){
-
-      video.pause();
-
-      video.currentTime = 0;
-
-      video.load();
-
-      video.muted = true;
-
-    }
-
-  });
-
-  // CLICK SOUND
-
-  video.addEventListener("click",()=>{
-
-    video.muted = !video.muted;
-
-  });
-
-});
-
-
-// =========================
-// LIQUID GLASS CURSOR
-// =========================
+/* =========================
+   CUSTOM CURSOR
+========================= */
 
 const cursor =
 document.querySelector(".cursor");
 
-let mouseX = 0;
-let mouseY = 0;
+if(cursor && window.innerWidth > 768){
 
-let currentX = 0;
-let currentY = 0;
+    document.body.style.cursor = "none";
 
+    let mouseX = 0;
+    let mouseY = 0;
 
-// TRACK MOUSE
+    let currentX = 0;
+    let currentY = 0;
 
-document.addEventListener("mousemove",(e)=>{
+    document.addEventListener("mousemove", (e) => {
 
-  mouseX = e.clientX;
-  mouseY = e.clientY;
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
 
-});
+    function animateCursor(){
 
+        currentX += (mouseX - currentX) * 0.18;
 
-// SMOOTH CURSOR
+        currentY += (mouseY - currentY) * 0.18;
 
-function animateCursor(){
+        cursor.style.left = currentX + "px";
 
-  currentX += (mouseX - currentX) * 0.18;
+        cursor.style.top = currentY + "px";
 
-  currentY += (mouseY - currentY) * 0.18;
+        requestAnimationFrame(animateCursor);
+    }
 
-  cursor.style.left =
-  currentX + "px";
+    animateCursor();
 
-  cursor.style.top =
-  currentY + "px";
+    const hoverItems =
+    document.querySelectorAll(
+        "a, button, .gallery-item, .video-card"
+    );
 
-  requestAnimationFrame(animateCursor);
+    hoverItems.forEach(item => {
+
+        item.addEventListener("mouseenter", () => {
+
+            cursor.classList.add("active");
+        });
+
+        item.addEventListener("mouseleave", () => {
+
+            cursor.classList.remove("active");
+        });
+    });
+
 }
 
-animateCursor();
+/* =========================
+   IMAGE LIGHTBOX
+========================= */
 
-
-// CURSOR HOVER
-
-const hoverItems =
-document.querySelectorAll(
-"a, button, .video-card, .gallery-item, .card, .btn"
-);
-
-hoverItems.forEach(item=>{
-
-  item.addEventListener("mouseenter",()=>{
-
-    cursor.classList.add("active");
-
-  });
-
-  item.addEventListener("mouseleave",()=>{
-
-    cursor.classList.remove("active");
-
-  });
-
-});
-
-
-// ======================
-// IMAGE LIGHTBOX
-// ======================
-
-const allImages =
-document.querySelectorAll(".gallery img");
+const galleryImages =
+document.querySelectorAll(".gallery-item img");
 
 const lightbox =
 document.querySelector(".lightbox");
 
-const lightboxImage =
-document.querySelector(".lightbox-img");
+const lightboxImg =
+document.querySelector(".lightbox img");
 
-const closeBtn =
+const closeLightbox =
 document.querySelector(".close-lightbox");
 
+galleryImages.forEach(img => {
 
-// OPEN LIGHTBOX
+    img.addEventListener("click", () => {
 
-allImages.forEach((img)=>{
+        if(lightbox && lightboxImg){
 
-  img.addEventListener("click",()=>{
+            lightbox.classList.add("active");
 
-    lightbox.style.display = "flex";
-
-    lightboxImage.src = img.src;
-
-  });
-
+            lightboxImg.src = img.src;
+        }
+    });
 });
 
+if(closeLightbox){
 
-// CLOSE BUTTON
+    closeLightbox.addEventListener("click", () => {
 
-closeBtn.addEventListener("click",()=>{
-
-  lightbox.style.display = "none";
-
-});
-
-
-// CLOSE OUTSIDE IMAGE
-
-lightbox.addEventListener("click",(e)=>{
-
-  if(e.target === lightbox){
-
-    lightbox.style.display = "none";
-
-  }
-
-});
-
-
-// =========================
-// MAGNETIC BUTTON
-// =========================
-
-const magneticBtn =
-document.querySelector(".btn");
-
-if(magneticBtn){
-
-  magneticBtn.addEventListener("mousemove",(e)=>{
-
-    const rect =
-    magneticBtn.getBoundingClientRect();
-
-    const x =
-    e.clientX - rect.left - rect.width / 2;
-
-    const y =
-    e.clientY - rect.top - rect.height / 2;
-
-    magneticBtn.style.transform =
-    `translate(${x * 0.18}px, ${y * 0.18}px)`;
-
-  });
-
-
-  magneticBtn.addEventListener("mouseleave",()=>{
-
-    magneticBtn.style.transform =
-    "translate(0px,0px)";
-
-  });
-
+        lightbox.classList.remove("active");
+    });
 }
 
+if(lightbox){
 
-/// =========================
-// VIDEO LIGHTBOX
-// =========================
+    lightbox.addEventListener("click", (e) => {
 
-const previewVideos =
-document.querySelectorAll(".video-card video");
+        if(e.target === lightbox){
+
+            lightbox.classList.remove("active");
+        }
+    });
+}
+
+/* =========================
+   VIDEO LIGHTBOX + PREVIEW
+========================= */
+
+const videoCards =
+document.querySelectorAll(".video-card");
 
 const videoLightbox =
 document.querySelector(".video-lightbox");
@@ -261,275 +189,167 @@ document.querySelector(".lightbox-video");
 const closeVideoLightbox =
 document.querySelector(".close-video-lightbox");
 
+videoCards.forEach(card => {
 
-// =========================
-// PREVIEW MODE
-// =========================
+    const video =
+    card.querySelector("video");
 
-previewVideos.forEach((video)=>{
+    if(!video) return;
 
-  // ALWAYS muted in preview
-  video.muted = true;
+    /* LOAD POSTER */
 
-  // PLAY ON HOVER
+    video.load();
 
-  video.addEventListener("mouseenter",()=>{
+    /* =====================
+       DESKTOP HOVER PREVIEW
+    ===================== */
 
-    // DON'T play preview if lightbox open
+    card.addEventListener("mouseenter", async () => {
 
-    if(
-      !videoLightbox.classList.contains("active")
-    ){
+        if(window.innerWidth > 768){
 
-      video.play();
+            try{
 
-    }
+                await video.play();
 
-  });
+            }catch(err){
 
-  // STOP ON LEAVE
+                console.log(err);
+            }
+        }
+    });
 
-  video.addEventListener("mouseleave",()=>{
+    card.addEventListener("mouseleave", () => {
 
-    // DON'T reset if fullscreen open
+        if(window.innerWidth > 768){
 
-    if(
-      !videoLightbox.classList.contains("active")
-    ){
+            video.pause();
 
-      video.pause();
+            video.currentTime = 0;
 
-      video.currentTime = 0;
+            video.load();
+        }
+    });
 
-    }
+    /* =====================
+       MOBILE HOLD PREVIEW
+    ===================== */
 
-  });
+    let holdTimeout;
 
-  // OPEN FULLSCREEN
+    card.addEventListener("touchstart", () => {
 
-  video.addEventListener("click",()=>{
+        holdTimeout = setTimeout(async () => {
 
-    // STOP ALL PREVIEW VIDEOS
+            try{
 
-    previewVideos.forEach((v)=>{
+                await video.play();
 
-      v.pause();
+            }catch(err){
 
-      v.currentTime = 0;
+                console.log(err);
+            }
+
+        }, 200);
 
     });
 
-    // GET SOURCE
+    card.addEventListener("touchend", () => {
 
-    const source =
-    video.querySelector("source").src;
-
-    // SET VIDEO
-
-    lightboxVideo.src = source;
-
-    // SHOW LIGHTBOX
-
-    videoLightbox.classList.add("active");
-
-    // ENABLE PLAYER
-
-    lightboxVideo.controls = true;
-
-    lightboxVideo.muted = false;
-
-    lightboxVideo.currentTime = 0;
-
-    // PLAY FULL VIDEO
-
-    lightboxVideo.play();
-
-  });
-
-});
-
-
-// =========================
-// CLOSE BUTTON
-// =========================
-
-closeVideoLightbox.addEventListener("click",()=>{
-
-  closeVideoPlayer();
-
-});
-
-
-// =========================
-// CLICK OUTSIDE
-// =========================
-
-videoLightbox.addEventListener("click",(e)=>{
-
-  if(e.target === videoLightbox){
-
-    closeVideoPlayer();
-
-  }
-
-});
-
-
-// =========================
-// CLOSE FUNCTION
-// =========================
-
-function closeVideoPlayer(){
-
-  videoLightbox.classList.remove("active");
-
-  lightboxVideo.pause();
-
-  lightboxVideo.currentTime = 0;
-
-  lightboxVideo.src = "";
-
-  // RESTORE THUMBNAILS
-
-  previewVideos.forEach((v)=>{
-
-    v.load();
-
-  });
-
-}
- 
-// =========================
-// APPLE SMOOTH SCROLL
-// =========================
-
-const lenis = new Lenis({
-
-  duration: 1.2,
-
-  smoothWheel: true,
-
-  easing: (t) => 1 - Math.pow(1 - t, 4),
-
-});
-
-
-function raf(time) {
-
-  lenis.raf(time);
-
-  requestAnimationFrame(raf);
-
-}
-
-requestAnimationFrame(raf);
-
-// =========================
-// LIGHTWEIGHT FLOAT EFFECT
-// =========================
-
-const floatCards =
-document.querySelectorAll(
-".card, .video-card, .gallery-item"
-);
-
-floatCards.forEach((card)=>{
-
-  card.addEventListener("mouseenter",()=>{
-
-    card.style.transform =
-    "translateY(-8px) scale(1.02)";
-
-  });
-
-  card.addEventListener("mouseleave",()=>{
-
-    card.style.transform =
-    "translateY(0px) scale(1)";
-
-  });
-
-});
-
-const sections = document.querySelectorAll("section");
-const navLinks = document.querySelectorAll(".nav-links a");
-
-window.addEventListener("scroll", () => {
-
-  let current = "";
-
-  sections.forEach(section => {
-
-    const sectionTop = section.offsetTop;
-
-    if(pageYOffset >= sectionTop - 200){
-      current = section.getAttribute("id");
-    }
-
-  });
-
-  navLinks.forEach(link => {
-
-    link.classList.remove("active");
-
-    if(link.getAttribute("href") === `#${current}`){
-      link.classList.add("active");
-    }
-
-  });
-
-});
-
-/* MOBILE MENU FIX */
-
-const menuToggle = document.querySelector(".menu-toggle");
-const navLinks = document.querySelector("nav ul");
-
-menuToggle.addEventListener("click", () => {
-    navLinks.classList.toggle("active");
-});
-
-/* CLOSE OUTSIDE */
-
-document.addEventListener("click", (e) => {
-
-    if(
-        !mobileMenu.contains(e.target) &&
-        !menuToggle.contains(e.target)
-    ){
-
-        mobileMenu.classList.remove("active");
-    }
-});
-
-/* CLOSE AFTER CLICK */
-
-document.querySelectorAll("nav ul li a")
-.forEach(link => {
-
-    link.addEventListener("click", () => {
-
-        mobileMenu.classList.remove("active");
-    });
-});
-const reels = document.querySelectorAll(".video-card video");
-
-reels.forEach(video => {
-
-    video.pause();
-
-    video.addEventListener("touchstart", () => {
-
-        video.play();
-
-    });
-
-    video.addEventListener("touchend", () => {
+        clearTimeout(holdTimeout);
 
         video.pause();
 
         video.currentTime = 0;
 
+        video.load();
     });
 
+    /* =====================
+       OPEN FULL VIDEO
+    ===================== */
+
+    card.addEventListener("click", () => {
+
+        if(videoLightbox && lightboxVideo){
+
+            const source =
+            video.querySelector("source").src;
+
+            lightboxVideo.src = source;
+
+            videoLightbox.classList.add("active");
+
+            lightboxVideo.play();
+        }
+    });
+
+});
+
+/* =========================
+   CLOSE VIDEO LIGHTBOX
+========================= */
+
+if(closeVideoLightbox){
+
+    closeVideoLightbox.addEventListener("click", () => {
+
+        videoLightbox.classList.remove("active");
+
+        lightboxVideo.pause();
+
+        lightboxVideo.src = "";
+    });
+}
+
+if(videoLightbox){
+
+    videoLightbox.addEventListener("click", (e) => {
+
+        if(e.target === videoLightbox){
+
+            videoLightbox.classList.remove("active");
+
+            lightboxVideo.pause();
+
+            lightboxVideo.src = "";
+        }
+    });
+}
+
+/* =========================
+   SMOOTH SCROLL
+========================= */
+
+document.querySelectorAll('a[href^="#"]')
+.forEach(anchor => {
+
+    anchor.addEventListener("click", function(e){
+
+        e.preventDefault();
+
+        const target =
+        document.querySelector(
+            this.getAttribute("href")
+        );
+
+        if(target){
+
+            target.scrollIntoView({
+
+                behavior: "smooth"
+            });
+        }
+    });
+});
+
+/* =========================
+   AOS
+========================= */
+
+AOS.init({
+
+    duration: 1000,
+
+    once: true
 });
