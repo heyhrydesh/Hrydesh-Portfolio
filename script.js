@@ -480,18 +480,58 @@ window.addEventListener("scroll", () => {
 
 });
 
+/* MOBILE MENU FIX */
+
 const menuToggle = document.querySelector(".menu-toggle");
-const navMenu = document.querySelector("nav ul");
+const navLinks = document.querySelector("nav ul");
 
 menuToggle.addEventListener("click", () => {
-    navMenu.classList.toggle("active");
+
+    navLinks.classList.toggle("active");
+
 });
 
-document.addEventListener("click", function (e) {
-    if (
+/* CLOSE OUTSIDE */
+
+document.addEventListener("click", (e) => {
+
+    if(
         !mobileMenu.contains(e.target) &&
         !menuToggle.contains(e.target)
-    ) {
+    ){
+
         mobileMenu.classList.remove("active");
     }
+});
+
+/* CLOSE AFTER CLICK */
+
+document.querySelectorAll("nav ul li a")
+.forEach(link => {
+
+    link.addEventListener("click", () => {
+
+        mobileMenu.classList.remove("active");
+    });
+});
+const reels = document.querySelectorAll(".video-card video");
+
+reels.forEach(video => {
+
+    video.pause();
+
+    video.addEventListener("touchstart", () => {
+
+        video.play();
+
+    });
+
+    video.addEventListener("touchend", () => {
+
+        video.pause();
+
+        video.currentTime = 0;
+
+    });
+
 });
