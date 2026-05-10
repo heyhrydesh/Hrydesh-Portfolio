@@ -1563,33 +1563,53 @@ section{
   }
 
  /* =========================
-   PINTEREST GALLERY
+   MOBILE PINTEREST LAYOUT
 ========================= */
+
 .gallery-grid,
 .video-grid{
 
-    columns:2 160px;
+    column-count:2;
+    column-gap:14px;
 
-    column-gap:12px;
-
-    padding:0 12px;
+    padding:0 14px;
 }
+
+/* ITEMS */
 
 .gallery-item,
 .video-card{
 
     break-inside:avoid;
 
-    margin-bottom:12px;
+    margin-bottom:14px;
+
+    border-radius:22px;
 
     overflow:hidden;
+
+    background:#111;
+
+    position:relative;
+}
+
+/* ORIGINAL IMAGE RATIO */
+
+.gallery-item img{
+
+    width:100%;
+
+    height:auto;
+
+    display:block;
+
+    object-fit:contain;
 
     border-radius:22px;
 }
 
-/* ORIGINAL RATIOS */
+/* ORIGINAL VIDEO RATIO */
 
-.gallery-item img,
 .video-card video{
 
     width:100%;
@@ -1598,20 +1618,49 @@ section{
 
     display:block;
 
+    object-fit:contain;
+
     border-radius:22px;
 
-    object-fit:contain;
+    background:black;
 }
 
-/* REMOVE BLACK GAPS */
+/* REMOVE FORCED HEIGHTS */
+
+.gallery-item,
+.video-card{
+
+    height:auto !important;
+    min-height:auto !important;
+}
+
+/* SMALLER REELS */
 
 .video-card{
-    background:none !important;
-    padding:0 !important;
-    box-shadow:none !important;
-    border:none !important;
+
+    transform:scale(0.97);
 }
 
+/* BETTER MOBILE SPACING */
+
+.gallery,
+.videos{
+
+    padding-top:20px;
+}
+
+/* SINGLE COLUMN FOR VERY SMALL PHONES */
+
+@media(max-width:480px){
+
+    .gallery-grid,
+    .video-grid{
+
+        column-count:2;
+        column-gap:10px;
+    }
+
+}
 /* OVERLAY */
 
 .video-overlay{
