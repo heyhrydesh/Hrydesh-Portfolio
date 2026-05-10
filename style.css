@@ -1777,101 +1777,172 @@ nav ul li a{
 }
 
 }
-/* =========================
-   MOBILE ONLY
-========================= */
+/* =========================================
+   CLEAN MOBILE REDESIGN
+========================================= */
 
 @media screen and (max-width: 768px){
 
+body{
+    overflow-x:hidden;
+}
+
+/* ================= NAVBAR ================= */
+
 nav{
-    padding:20px;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:18px 20px;
+
+    background:rgba(0,0,0,0.78);
+    backdrop-filter:blur(18px);
+
+    z-index:99999;
 }
 
 .logo{
-    font-size:2.5rem;
+    font-size:2.4rem;
+    font-weight:700;
 }
 
-/* SHOW MENU ICON */
-
 .menu-toggle{
-    display:block;
-    font-size:2rem;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    width:48px;
+    height:48px;
+
+    border-radius:14px;
+
+    background:rgba(255,255,255,0.05);
+
+    font-size:1.8rem;
     color:white;
+
     cursor:pointer;
-    z-index:9999;
 }
 
 /* MOBILE MENU */
 
 nav ul{
+
     position:absolute;
-    top:80px;
+
+    top:85px;
     right:20px;
 
     width:220px;
-
-    background:#111;
-
-    border-radius:20px;
-
-    padding:20px;
 
     display:none;
     flex-direction:column;
     gap:18px;
 
-    box-shadow:0 10px 30px rgba(0,0,0,0.5);
+    padding:24px;
+
+    border-radius:24px;
+
+    background:#111;
+
+    border:1px solid rgba(255,255,255,0.08);
+
+    box-shadow:0 20px 50px rgba(0,0,0,0.5);
 }
 
 nav ul.active{
     display:flex;
 }
 
-/* HERO */
+nav ul li{
+    list-style:none;
+}
+
+nav ul li a{
+    color:white;
+    text-decoration:none;
+    font-size:1rem;
+}
+
+/* ================= HERO ================= */
 
 .hero{
-    padding-top:140px;
+
+    min-height:100vh;
+
+    padding:
+    140px 24px 80px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.hero-content{
+    width:100%;
+    text-align:center;
 }
 
 .hero h1{
+
     font-size:4rem;
-    line-height:1;
+    line-height:0.95;
+
+    margin-bottom:20px;
 }
 
 .hero p{
+
     font-size:1rem;
-    padding:0 20px;
+    line-height:1.7;
+
+    color:#d0d0d0;
+
+    margin-bottom:28px;
 }
 
-.hero-buttons{
+/* BUTTONS */
+
+.btn,
+.resume-btn{
+
+    width:100%;
+    max-width:280px;
+
     display:flex;
-    flex-direction:column;
+    justify-content:center;
     align-items:center;
-    gap:15px;
-}
 
-.btn{
-    width:260px;
+    margin:12px auto;
+
+    padding:16px 24px;
+
+    border-radius:50px;
+
     text-align:center;
 }
 
-/* ABOUT FIX */
+/* ================= TITLES ================= */
 
-.about-content{
-    display:flex;
-    flex-direction:column;
+.projects h2,
+.gallery h2,
+.videos h2,
+.about h2,
+.skills h2,
+.contact h2{
+
+    font-size:2.5rem;
+
+    margin-bottom:40px;
 }
 
-.about-image img{
-    width:100%;
-    border-radius:30px;
-}
-
-.about-text{
-    padding-top:20px;
-}
-
-/* PINTEREST GALLERY */
+/* ================= PINTEREST GALLERY ================= */
 
 .gallery-grid,
 .video-grid{
@@ -1879,118 +1950,28 @@ nav ul.active{
     column-count:2;
     column-gap:12px;
 
-    padding:0 14px;
-}
-
-.gallery-item,
-.video-card{
-    break-inside:avoid;
-    margin-bottom:12px;
-    border-radius:20px;
-    overflow:hidden;
-}
-
-.gallery-item img,
-.video-card video{
-    width:100%;
-    display:block;
-    border-radius:20px;
-    object-fit:cover;
-}
-
-/* REMOVE BLACK AREA */
-
-.video-card{
-    background:none;
-    min-height:auto;
     padding:0;
 }
 
-}
-
-/* =========================
-   MOBILE MASONRY FIX
-========================= */
-
-@media screen and (max-width:768px){
-
-/* MOBILE NAV */
-
-.menu-toggle{
-    display:block;
-    font-size:2rem;
-    color:white;
-    cursor:pointer;
-}
-
-nav ul{
-    display:none;
-    flex-direction:column;
-
-    position:absolute;
-    top:80px;
-    right:20px;
-
-    background:#111;
-    padding:20px;
-
-    border-radius:20px;
-
-    width:220px;
-
-    z-index:999;
-}
-
-nav ul.active{
-    display:flex;
-}
-
-/* HERO */
-
-.hero{
-    padding-top:140px;
-}
-
-.hero-buttons{
-    flex-direction:column;
-    gap:14px;
-}
-
-.btn{
-    width:250px;
-    text-align:center;
-}
-
-/* ABOUT */
-
-.about-content{
-    grid-template-columns:1fr !important;
-}
-
-/* REAL PINTEREST STYLE */
-
-.gallery-grid,
-.video-grid{
-
-    column-count:2;
-    column-gap:12px;
-
-    padding:14px;
-}
+/* ITEMS */
 
 .gallery-item,
 .video-card{
 
     break-inside:avoid;
+
     margin-bottom:12px;
 
-    border-radius:20px;
     overflow:hidden;
 
+    border-radius:22px;
+
     background:none !important;
+
+    box-shadow:none !important;
 }
 
-/* KEEP ORIGINAL SIZE */
+/* KEEP ORIGINAL IMAGE SIZE */
 
 .gallery-item img,
 .video-card video{
@@ -2000,7 +1981,131 @@ nav ul.active{
 
     display:block;
 
+    border-radius:22px;
+
+    object-fit:cover;
+}
+
+/* REMOVE VIDEO BLACK AREAS */
+
+.video-card{
+    min-height:auto !important;
+    padding:0 !important;
+}
+
+/* ================= ABOUT ================= */
+
+.about-container{
+
+    display:flex;
+    flex-direction:column;
+
+    gap:30px;
+}
+
+.about-left{
+
+    position:relative !important;
+    top:0 !important;
+}
+
+.about-left img{
+
+    width:100%;
+
+    border-radius:28px;
+}
+
+.about-right{
+
+    width:100%;
+}
+
+.about-right h2{
+    font-size:2.5rem;
+}
+
+.about-right p{
+
+    font-size:1rem;
+    line-height:1.9;
+
+    color:#d0d0d0;
+}
+
+/* TAGS */
+
+.about-tags{
+
+    display:flex;
+    flex-wrap:wrap;
+
+    gap:12px;
+}
+
+.about-tags span{
+
+    font-size:0.9rem;
+
+    padding:10px 18px;
+}
+
+/* ================= PROJECTS ================= */
+
+.project-grid{
+
+    grid-template-columns:1fr;
+
+    gap:18px;
+}
+
+.card{
+
+    padding:28px;
+
+    border-radius:24px;
+}
+
+/* ================= SKILLS ================= */
+
+.skills-grid{
+
+    grid-template-columns:1fr 1fr;
+
+    gap:14px;
+}
+
+.skill-card{
+
+    padding:24px 14px;
+
     border-radius:20px;
+}
+
+/* ================= CONTACT ================= */
+
+.contact-grid{
+
+    grid-template-columns:1fr;
+
+    gap:16px;
+}
+
+.contact-card{
+
+    padding:24px;
+
+    border-radius:22px;
+}
+
+/* ================= CURSOR OFF ================= */
+
+.cursor{
+    display:none;
+}
+
+*{
+    cursor:auto !important;
 }
 
 }
