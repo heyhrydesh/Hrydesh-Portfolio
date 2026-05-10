@@ -353,3 +353,54 @@ AOS.init({
 
     once: true
 });
+
+/* =========================================
+   PREMIUM CINEMATIC REVEAL
+========================================= */
+
+const revealItems = document.querySelectorAll(`
+    .hero-content,
+    .card,
+    .gallery-item,
+    .video-card,
+    .about-left,
+    .about-right,
+    .skill-card,
+    .contact-card,
+    h2
+`);
+
+revealItems.forEach((el, index) => {
+
+    el.classList.add("reveal");
+
+    if(index % 4 === 1){
+        el.classList.add("reveal-delay-1");
+    }
+
+    if(index % 4 === 2){
+        el.classList.add("reveal-delay-2");
+    }
+
+    if(index % 4 === 3){
+        el.classList.add("reveal-delay-3");
+    }
+});
+
+const revealObserver = new IntersectionObserver((entries) => {
+
+    entries.forEach((entry) => {
+
+        if(entry.isIntersecting){
+
+            entry.target.classList.add("active");
+        }
+    });
+
+},{
+    threshold:0.12
+});
+
+revealItems.forEach((el) => {
+    revealObserver.observe(el);
+});
