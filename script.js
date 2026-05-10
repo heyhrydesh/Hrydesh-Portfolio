@@ -404,3 +404,106 @@ const revealObserver = new IntersectionObserver((entries) => {
 revealItems.forEach((el) => {
     revealObserver.observe(el);
 });
+
+document.querySelectorAll(".gallery-item, .video-card, .btn").forEach(card => {
+
+    card.addEventListener("mousemove", (e) => {
+
+        const rect = card.getBoundingClientRect();
+
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const moveX = (x - rect.width / 2) / 18;
+        const moveY = (y - rect.height / 2) / 18;
+
+        card.style.transform = `
+            perspective(1000px)
+            rotateY(${moveX}deg)
+            rotateX(${-moveY}deg)
+            scale(1.03)
+        `;
+    });
+
+    card.addEventListener("mouseleave", () => {
+
+        card.style.transform = `
+            perspective(1000px)
+            rotateY(0deg)
+            rotateX(0deg)
+            scale(1)
+        `;
+    });
+
+});
+/* =========================================
+   ULTRA CINEMATIC LOADER
+========================================= */
+
+window.addEventListener("load", () => {
+
+    const loader =
+    document.getElementById("cinematic-loader");
+
+    const hero =
+    document.querySelector(".hero");
+
+    const heroContent =
+    document.querySelector(".hero-content");
+
+    setTimeout(() => {
+
+        loader.classList.add("hide");
+
+        /* START HERO ANIMATION */
+
+        setTimeout(() => {
+
+            hero.classList.add("show");
+
+            heroContent.classList.add("show");
+
+        }, 500);
+
+    }, 4200);
+
+});
+/* =========================================
+   AUTO COLOR EXTRACTION GLOW
+========================================= */
+
+const header = document.querySelector("header");
+
+const hoverItems = document.querySelectorAll(`
+    .gallery-item img,
+    .video-card video
+`);
+
+hoverItems.forEach(item => {
+
+    item.addEventListener("mouseenter", () => {
+
+        const colors = [
+
+            "rgba(0,195,255,0.25)",
+            "rgba(122,0,255,0.25)",
+            "rgba(255,140,0,0.25)",
+            "rgba(0,255,170,0.22)",
+            "rgba(255,0,120,0.22)"
+        ];
+
+        const randomColor =
+        colors[Math.floor(Math.random() * colors.length)];
+
+        header.style.boxShadow =
+        `0 0 60px ${randomColor}`;
+
+    });
+
+    item.addEventListener("mouseleave", () => {
+
+        header.style.boxShadow =
+        "0 0 0 rgba(0,0,0,0)";
+    });
+
+});

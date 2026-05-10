@@ -13,6 +13,22 @@ body{
   background:#0a0a0a;
   color:white;
   overflow-x:hidden;
+
+  .grain{
+
+    position:fixed;
+
+    inset:0;
+
+    pointer-events:none;
+
+    z-index:9999;
+
+    opacity:0.05;
+
+    background-image:url("https://grainy-gradients.vercel.app/noise.svg");
+}
+
 }
 
 /* HERO */
@@ -1561,83 +1577,99 @@ section{
   }
 
  /* =========================
-   PINTEREST MASONRY FIX
+   MOBILE PINTEREST LAYOUT
 ========================= */
 
 .gallery-grid,
 .video-grid{
 
-    column-count: 2;
-    column-gap: 14px;
+    column-count:2;
+    column-gap:14px;
 
-    padding: 10px 14px;
+    padding:0 14px;
 }
 
-/* CARD */
+/* ITEMS */
 
 .gallery-item,
 .video-card{
 
-    break-inside: avoid;
+    break-inside:avoid;
 
-    margin-bottom: 14px;
+    margin-bottom:14px;
 
-    border-radius: 26px;
+    border-radius:22px;
 
-    overflow: hidden;
+    overflow:hidden;
 
-    background: transparent;
+    background:#111;
 
-    position: relative;
+    position:relative;
 }
 
-/* REMOVE FIXED HEIGHT */
+/* ORIGINAL IMAGE RATIO */
 
-.gallery-item img,
+.gallery-item img{
+
+    width:100%;
+
+    display:block;
+
+    object-fit:contain;
+
+    border-radius:22px;
+}
+
+/* ORIGINAL VIDEO RATIO */
+
 .video-card video{
 
-    width: 100%;
+    width:100%;
 
-    height: auto !important;
 
-    display: block;
+    display:block;
 
-    border-radius: 26px;
+    object-fit:contain;
 
-    object-fit: contain !important;
+    border-radius:22px;
 
-    background: transparent;
-
-    aspect-ratio: auto !important;
+    background:black;
 }
 
-/* REMOVE BLACK EMPTY AREA */
+/* REMOVE FORCED HEIGHTS */
 
-.video-card,
-.gallery-item{
+.gallery-item,
+.video-card{
 
-    height: auto !important;
-
-    min-height: unset !important;
+    min-height:auto !important;
 }
 
-/* MOBILE */
+/* SMALLER REELS */
 
-@media(max-width:768px){
+.video-card{
+
+    transform:scale(0.97);
+}
+
+/* BETTER MOBILE SPACING */
+
+.gallery,
+.videos{
+
+    padding-top:20px;
+}
+
+/* SINGLE COLUMN FOR VERY SMALL PHONES */
+
+@media(max-width:480px){
 
     .gallery-grid,
     .video-grid{
 
-        column-count: 2;
-
-        column-gap: 12px;
+        column-count:2;
+        column-gap:10px;
     }
 
-    .gallery-item,
-    .video-card{
-
-        margin-bottom: 12px;
-    }
 }
 /* OVERLAY */
 
@@ -2215,4 +2247,495 @@ nav ul li a{
         filter:blur(12px);
     }
 
+}
+
+header{
+
+    backdrop-filter: blur(18px);
+
+    background: rgba(0,0,0,0.45);
+
+    border-bottom:1px solid rgba(255,255,255,0.05);
+}
+
+/* =========================================
+   ULTRA CINEMATIC LOADER
+========================================= */
+
+#cinematic-loader{
+
+    position:fixed;
+
+    inset:0;
+
+    background:#000;
+
+    z-index:999999999;
+
+    overflow:hidden;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    transition:
+    opacity 2s ease,
+    visibility 2s ease;
+}
+
+/* HIDE */
+
+#cinematic-loader.hide{
+
+    opacity:0;
+
+    visibility:hidden;
+
+    pointer-events:none;
+}
+
+/* CENTER */
+
+.loader-center{
+
+    position:relative;
+
+    z-index:5;
+
+    text-align:center;
+}
+
+/* LOGO */
+
+.loader-title{
+
+    font-size:7rem;
+
+    font-weight:900;
+
+    letter-spacing:-5px;
+
+    background:
+    linear-gradient(
+        90deg,
+        #00c3ff,
+        #7a00ff,
+        #00c3ff
+    );
+
+    background-size:300% 300%;
+
+    animation:
+    gradientMove 8s ease infinite,
+    logoReveal 3s cubic-bezier(.16,1,.3,1) forwards;
+
+    -webkit-background-clip:text;
+
+    -webkit-text-fill-color:transparent;
+
+    opacity:0;
+
+    transform:
+    scale(0.6)
+    translateY(80px);
+
+    filter:
+    blur(40px);
+}
+
+/* LINE */
+
+.loader-line{
+
+    width:0;
+
+    height:2px;
+
+    margin:auto;
+
+    margin-top:25px;
+
+    background:
+    linear-gradient(
+        90deg,
+        transparent,
+        #00c3ff,
+        #7a00ff,
+        transparent
+    );
+
+    animation:
+    lineExpand 2.4s ease forwards;
+
+    animation-delay:1.2s;
+
+    opacity:0;
+}
+
+/* LIGHT BLOBS */
+
+.loader-light{
+
+    position:absolute;
+
+    border-radius:50%;
+
+    filter:blur(140px);
+
+    opacity:0.4;
+
+    animation:
+    floatLights 12s ease-in-out infinite;
+}
+
+.light-1{
+
+    width:400px;
+    height:400px;
+
+    background:#00c3ff;
+
+    top:-100px;
+    left:-100px;
+}
+
+.light-2{
+
+    width:350px;
+    height:350px;
+
+    background:#7a00ff;
+
+    bottom:-120px;
+    right:-120px;
+
+    animation-delay:2s;
+}
+
+.light-3{
+
+    width:250px;
+    height:250px;
+
+    background:#ff8800;
+
+    top:40%;
+    left:50%;
+
+    animation-delay:4s;
+}
+
+/* GRAIN */
+
+.loader-grain{
+
+    position:absolute;
+
+    inset:0;
+
+    opacity:0.05;
+
+    background-image:
+    url("https://grainy-gradients.vercel.app/noise.svg");
+}
+
+/* LOGO REVEAL */
+
+@keyframes logoReveal{
+
+    0%{
+
+        opacity:0;
+
+        transform:
+        scale(0.6)
+        translateY(80px);
+
+        filter:blur(40px);
+    }
+
+    50%{
+
+        opacity:1;
+
+        transform:
+        scale(1.08)
+        translateY(0);
+
+        filter:blur(0);
+    }
+
+    100%{
+
+        opacity:1;
+
+        transform:
+        scale(1)
+        translateY(0);
+
+        filter:blur(0);
+    }
+}
+
+/* LINE */
+
+@keyframes lineExpand{
+
+    0%{
+
+        width:0;
+
+        opacity:0;
+    }
+
+    100%{
+
+        width:240px;
+
+        opacity:1;
+    }
+}
+
+/* FLOATING LIGHTS */
+
+@keyframes floatLights{
+
+    0%{
+
+        transform:
+        translate(0,0)
+        scale(1);
+    }
+
+    50%{
+
+        transform:
+        translate(40px,-30px)
+        scale(1.15);
+    }
+
+    100%{
+
+        transform:
+        translate(0,0)
+        scale(1);
+    }
+}
+
+/* GRADIENT ANIMATION */
+
+@keyframes gradientMove{
+
+    0%{
+
+        background-position:0% 50%;
+    }
+
+    50%{
+
+        background-position:100% 50%;
+    }
+
+    100%{
+
+        background-position:0% 50%;
+    }
+}
+
+/* PAGE REVEAL */
+
+body{
+
+    opacity:0;
+
+    animation:
+    bodyReveal 2s ease forwards;
+
+    animation-delay:3.5s;
+}
+
+@keyframes bodyReveal{
+
+    to{
+
+        opacity:1;
+    }
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+    .loader-title{
+
+        font-size:4rem;
+    }
+
+    .loader-line{
+
+        width:160px;
+    }
+
+    .loader-light{
+
+        filter:blur(90px);
+    }
+}
+
+/* DYNAMIC NAVBAR GLOW */
+
+header{
+
+    transition:
+    background 0.6s ease,
+    box-shadow 0.6s ease;
+}
+
+
+
+/* =========================================
+   HERO CINEMATIC INTRO
+========================================= */
+
+.hero-content{
+
+    opacity:0;
+
+    transform:
+    translateY(80px)
+    scale(0.92);
+
+    filter:
+    blur(30px);
+
+    transition:
+    opacity 2s cubic-bezier(.16,1,.3,1),
+    transform 2s cubic-bezier(.16,1,.3,1),
+    filter 2s cubic-bezier(.16,1,.3,1);
+}
+
+/* ACTIVE */
+
+.hero-content.show{
+
+    opacity:1;
+
+    transform:
+    translateY(0)
+    scale(1);
+
+    filter:blur(0);
+}
+
+/* TITLE */
+
+.hero-content h1{
+
+    opacity:0;
+
+    transform:
+    translateY(50px);
+
+    filter:blur(20px);
+
+    transition:
+    all 2s cubic-bezier(.16,1,.3,1);
+
+    transition-delay:0.2s;
+}
+
+.hero-content.show h1{
+
+    opacity:1;
+
+    transform:translateY(0);
+
+    filter:blur(0);
+}
+
+/* SUBTITLE */
+
+.hero-content p{
+
+    opacity:0;
+
+    transform:
+    translateY(40px);
+
+    filter:blur(12px);
+
+    transition:
+    all 2s cubic-bezier(.16,1,.3,1);
+
+    transition-delay:0.5s;
+}
+
+.hero-content.show p{
+
+    opacity:1;
+
+    transform:translateY(0);
+
+    filter:blur(0);
+}
+
+/* BUTTONS */
+
+.hero-buttons{
+
+    opacity:0;
+
+    transform:
+    translateY(30px)
+    scale(0.96);
+
+    filter:blur(12px);
+
+    transition:
+    all 2s cubic-bezier(.16,1,.3,1);
+
+    transition-delay:0.8s;
+}
+
+.hero-content.show .hero-buttons{
+
+    opacity:1;
+
+    transform:
+    translateY(0)
+    scale(1);
+
+    filter:blur(0);
+}
+
+/* HERO BG */
+
+.hero{
+
+    overflow:hidden;
+}
+
+.hero::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    backdrop-filter:blur(12px);
+
+    opacity:1;
+
+    transition:
+    opacity 2.5s ease;
+
+    pointer-events:none;
+}
+
+.hero.show::after{
+
+    opacity:0;
 }
