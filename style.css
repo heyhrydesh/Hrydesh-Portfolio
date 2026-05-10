@@ -1456,27 +1456,8 @@ section{
     z-index:999;
   }
 
-  .logo{
-    font-size:2.5rem;
-    text-align:center;
-    margin-bottom:18px;
-  }
 
-  nav ul{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:14px;
-    padding:0;
-    margin:0;
-    list-style:none;
-    text-align:center;
-  }
-
-  nav ul li a{
-    font-size:1rem;
-    white-space:nowrap;
-  }
-
+  
   /* =========================
       HERO
   ========================== */
@@ -1631,4 +1612,74 @@ section{
     font-size:0.95rem;
   }
 
+}
+
+/* =========================
+   CLEAN MOBILE NAVBAR
+========================= */
+
+.menu-toggle{
+    display:none;
+}
+
+@media (max-width:768px){
+
+    nav{
+        position:fixed;
+        top:0;
+        left:0;
+        width:100%;
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        padding:18px 24px;
+        background:rgba(0,0,0,0.55);
+        backdrop-filter:blur(20px);
+        z-index:9999;
+    }
+
+    .logo{
+        font-size:2.4rem;
+        margin:0;
+    }
+
+    .menu-toggle{
+        display:block;
+        font-size:2rem;
+        color:#fff;
+        cursor:pointer;
+    }
+
+    nav ul{
+        position:absolute;
+        top:85px;
+        left:5%;
+        width:90%;
+        background:rgba(10,10,10,0.92);
+        border-radius:24px;
+        padding:25px;
+        display:none;
+        flex-direction:column;
+        gap:20px;
+        text-align:center;
+        backdrop-filter:blur(20px);
+    }
+
+    nav ul.active{
+        display:flex;
+    }
+
+    nav ul li{
+        list-style:none;
+    }
+
+    nav ul li a{
+        color:white;
+        text-decoration:none;
+        font-size:1.1rem;
+    }
+
+    .hero{
+        padding-top:140px;
+    }
 }
