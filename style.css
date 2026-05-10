@@ -1441,33 +1441,49 @@ section{
 
 @media (max-width: 768px){
 
-  /* NAVBAR */
+  /* =========================
+      NAVBAR
+  ========================== */
+
   nav{
-    padding: 18px 5%;
-    backdrop-filter: blur(20px);
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    padding:18px 4%;
+    background:rgba(0,0,0,0.55);
+    backdrop-filter:blur(18px);
+    z-index:999;
   }
 
   .logo{
-    font-size: 2rem;
-    margin-bottom: 12px;
+    font-size:2.5rem;
+    text-align:center;
+    margin-bottom:18px;
   }
 
   nav ul{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:center;
-    gap:18px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
     padding:0;
+    margin:0;
+    list-style:none;
+    text-align:center;
   }
 
   nav ul li a{
-    font-size:1.1rem;
+    font-size:1rem;
+    white-space:nowrap;
   }
 
-  /* HERO */
+  /* =========================
+      HERO
+  ========================== */
+
   .hero{
-    height:100vh;
-    padding:0 6%;
+    min-height:100vh;
+    padding:180px 6% 80px;
     text-align:center;
   }
 
@@ -1477,74 +1493,142 @@ section{
   }
 
   .hero p{
-    font-size:1.2rem;
-    line-height:1.5;
+    font-size:1.1rem;
+    line-height:1.6;
   }
 
-  /* BUTTONS */
   .hero-buttons{
+    display:flex;
     flex-direction:column;
-    align-items:center;
-    gap:18px;
+    gap:16px;
+    margin-top:35px;
   }
 
   .btn{
-    width:90%;
+    width:100%;
     text-align:center;
   }
 
-  /* PROJECTS */
+  /* =========================
+      SECTION TITLES
+  ========================== */
+
+  section h2{
+    font-size:3rem;
+    margin-bottom:35px;
+  }
+
+  /* =========================
+      PROJECTS
+  ========================== */
+
   .projects-grid{
     grid-template-columns:1fr;
-    gap:25px;
+    gap:20px;
   }
 
   .project-card{
-    padding:35px 28px;
-    border-radius:30px;
+    padding:30px;
+    border-radius:28px;
   }
 
-  /* GALLERY */
+  /* =========================
+      GALLERY PINTEREST STYLE
+  ========================== */
+
   .gallery-grid{
-    grid-template-columns:1fr;
-    gap:22px;
+    column-count:2;
+    column-gap:14px;
   }
 
   .gallery-grid img{
     width:100%;
-    border-radius:28px;
+    margin-bottom:14px;
+    border-radius:22px;
+    display:block;
+    break-inside:avoid;
   }
 
-  /* VIDEOS */
+  /* =========================
+      REELS PINTEREST STYLE
+  ========================== */
+
   .video-grid{
-    columns:1;
-    column-gap:18px;
+    column-count:2;
+    column-gap:14px;
   }
 
   .video-card{
-    margin-bottom:18px;
+    display:inline-block;
+    width:100%;
+    margin-bottom:14px;
+    break-inside:avoid;
+    background:none !important;
+    padding:0 !important;
+    border:none !important;
+    box-shadow:none !important;
   }
 
   .video-card video{
     width:100%;
-    border-radius:28px;
+    height:auto;
+    display:block;
+    border-radius:22px;
+    background:none;
   }
 
-  /* ABOUT */
+  .video-overlay{
+    position:absolute;
+    bottom:10px;
+    left:10px;
+    z-index:2;
+  }
+
+  .video-overlay h3{
+    font-size:0.9rem;
+  }
+
+  /* REMOVE BLACK SPACE */
+  .video-card::before,
+  .video-card::after{
+    display:none !important;
+  }
+
+  /* =========================
+      ABOUT SECTION
+  ========================== */
+
   .about-container{
+    display:flex;
     flex-direction:column;
-    gap:35px;
+    gap:25px;
   }
 
   .about-container img{
     width:100%;
-    border-radius:30px;
+    border-radius:28px;
   }
 
-  /* SECTION TITLES */
-  section h2{
-    font-size:3rem;
-    margin-bottom:40px;
+  .about-text{
+    padding:0;
+  }
+
+  .about-text p{
+    font-size:1.05rem;
+    line-height:1.9;
+  }
+
+  /* =========================
+      SKILLS
+  ========================== */
+
+  .skills-container{
+    gap:12px;
+  }
+
+  .skill{
+    padding:12px 22px;
+    font-size:0.95rem;
   }
 
 }
