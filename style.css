@@ -1777,3 +1777,230 @@ nav ul li a{
 }
 
 }
+/* =========================
+   MOBILE ONLY
+========================= */
+
+@media screen and (max-width: 768px){
+
+nav{
+    padding:20px;
+}
+
+.logo{
+    font-size:2.5rem;
+}
+
+/* SHOW MENU ICON */
+
+.menu-toggle{
+    display:block;
+    font-size:2rem;
+    color:white;
+    cursor:pointer;
+    z-index:9999;
+}
+
+/* MOBILE MENU */
+
+nav ul{
+    position:absolute;
+    top:80px;
+    right:20px;
+
+    width:220px;
+
+    background:#111;
+
+    border-radius:20px;
+
+    padding:20px;
+
+    display:none;
+    flex-direction:column;
+    gap:18px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,0.5);
+}
+
+nav ul.active{
+    display:flex;
+}
+
+/* HERO */
+
+.hero{
+    padding-top:140px;
+}
+
+.hero h1{
+    font-size:4rem;
+    line-height:1;
+}
+
+.hero p{
+    font-size:1rem;
+    padding:0 20px;
+}
+
+.hero-buttons{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:15px;
+}
+
+.btn{
+    width:260px;
+    text-align:center;
+}
+
+/* ABOUT FIX */
+
+.about-content{
+    display:flex;
+    flex-direction:column;
+}
+
+.about-image img{
+    width:100%;
+    border-radius:30px;
+}
+
+.about-text{
+    padding-top:20px;
+}
+
+/* PINTEREST GALLERY */
+
+.gallery-grid,
+.video-grid{
+
+    column-count:2;
+    column-gap:12px;
+
+    padding:0 14px;
+}
+
+.gallery-item,
+.video-card{
+    break-inside:avoid;
+    margin-bottom:12px;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.gallery-item img,
+.video-card video{
+    width:100%;
+    display:block;
+    border-radius:20px;
+    object-fit:cover;
+}
+
+/* REMOVE BLACK AREA */
+
+.video-card{
+    background:none;
+    min-height:auto;
+    padding:0;
+}
+
+}
+
+/* =========================
+   MOBILE MASONRY FIX
+========================= */
+
+@media screen and (max-width:768px){
+
+/* MOBILE NAV */
+
+.menu-toggle{
+    display:block;
+    font-size:2rem;
+    color:white;
+    cursor:pointer;
+}
+
+nav ul{
+    display:none;
+    flex-direction:column;
+
+    position:absolute;
+    top:80px;
+    right:20px;
+
+    background:#111;
+    padding:20px;
+
+    border-radius:20px;
+
+    width:220px;
+
+    z-index:999;
+}
+
+nav ul.active{
+    display:flex;
+}
+
+/* HERO */
+
+.hero{
+    padding-top:140px;
+}
+
+.hero-buttons{
+    flex-direction:column;
+    gap:14px;
+}
+
+.btn{
+    width:250px;
+    text-align:center;
+}
+
+/* ABOUT */
+
+.about-content{
+    grid-template-columns:1fr !important;
+}
+
+/* REAL PINTEREST STYLE */
+
+.gallery-grid,
+.video-grid{
+
+    column-count:2;
+    column-gap:12px;
+
+    padding:14px;
+}
+
+.gallery-item,
+.video-card{
+
+    break-inside:avoid;
+    margin-bottom:12px;
+
+    border-radius:20px;
+    overflow:hidden;
+
+    background:none !important;
+}
+
+/* KEEP ORIGINAL SIZE */
+
+.gallery-item img,
+.video-card video{
+
+    width:100%;
+    height:auto;
+
+    display:block;
+
+    border-radius:20px;
+}
+
+}

@@ -481,10 +481,10 @@ window.addEventListener("scroll", () => {
 });
 
 const menuToggle = document.querySelector(".menu-toggle");
-const navLinks = document.querySelector("nav ul");
+const navMenu = document.querySelector("nav ul");
 
 menuToggle.addEventListener("click", () => {
-    navLinks.classList.toggle("active");
+    navMenu.classList.toggle("active");
 });
 
 document.addEventListener("click", function (e) {
