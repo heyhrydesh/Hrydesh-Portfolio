@@ -479,3 +479,20 @@ window.addEventListener("scroll", () => {
   });
 
 });
+
+const menuToggle = document.querySelector(".menu-toggle");
+const mobileMenu = document.querySelector("nav ul");
+
+menuToggle.addEventListener("click", function (e) {
+    e.stopPropagation();
+    mobileMenu.classList.toggle("active");
+});
+
+document.addEventListener("click", function (e) {
+    if (
+        !mobileMenu.contains(e.target) &&
+        !menuToggle.contains(e.target)
+    ) {
+        mobileMenu.classList.remove("active");
+    }
+});

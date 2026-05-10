@@ -1468,15 +1468,20 @@ section{
     text-align:center;
   }
 
-  .hero h1{
-    font-size:4rem;
-    line-height:1;
-  }
+ .hero-content{
+    padding-top:60px;
+}
 
-  .hero p{
-    font-size:1.1rem;
-    line-height:1.6;
-  }
+.hero h1{
+    font-size:4.3rem;
+    line-height:0.95;
+}
+
+.hero p{
+    margin-top:18px;
+    font-size:1.05rem;
+    line-height:1.7;
+}
 
   .hero-buttons{
     display:flex;
