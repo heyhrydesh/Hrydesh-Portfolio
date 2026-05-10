@@ -1485,10 +1485,12 @@ section{
     margin-top:35px;
   }
 
-  .btn{
-    width:100%;
-    text-align:center;
-  }
+.btn{
+    width:auto;
+    min-width:240px;
+    padding:16px 28px;
+    font-size:1rem;
+}
 
   /* =========================
       SECTION TITLES
@@ -1513,62 +1515,76 @@ section{
     border-radius:28px;
   }
 
-  /* =========================
-      GALLERY PINTEREST STYLE
-  ========================== */
+ /* =========================
+   PINTEREST GALLERY
+========================= */
 
-  .gallery-grid{
+.gallery-grid,
+.video-grid{
     column-count:2;
-    column-gap:14px;
-  }
+    column-gap:12px;
+    padding:0 14px;
+}
 
-  .gallery-grid img{
-    width:100%;
-    margin-bottom:14px;
+.gallery-item,
+.video-card{
+    break-inside:avoid;
+    margin-bottom:12px;
+    position:relative;
+    overflow:hidden;
     border-radius:22px;
-    display:block;
-    break-inside:avoid;
-  }
+}
 
-  /* =========================
-      REELS PINTEREST STYLE
-  ========================== */
-
-  .video-grid{
-    column-count:2;
-    column-gap:14px;
-  }
-
-  .video-card{
-    display:inline-block;
+.gallery-item img,
+.video-card video{
     width:100%;
-    margin-bottom:14px;
-    break-inside:avoid;
+    display:block;
+    border-radius:22px;
+    height:auto;
+}
+
+/* RANDOM HEIGHT FEEL */
+
+.gallery-item:nth-child(3n) img,
+.video-card:nth-child(3n) video{
+    aspect-ratio:9/16;
+    object-fit:cover;
+}
+
+.gallery-item:nth-child(2n) img,
+.video-card:nth-child(2n) video{
+    aspect-ratio:1/1;
+    object-fit:cover;
+}
+
+.gallery-item:nth-child(5n) img,
+.video-card:nth-child(5n) video{
+    aspect-ratio:4/5;
+    object-fit:cover;
+}
+
+/* REMOVE BLACK GAPS */
+
+.video-card{
     background:none !important;
     padding:0 !important;
-    border:none !important;
     box-shadow:none !important;
-  }
+    border:none !important;
+}
 
-  .video-card video{
-    width:100%;
-    height:auto;
-    display:block;
-    border-radius:22px;
-    background:none;
-  }
+/* OVERLAY */
 
-  .video-overlay{
+.video-overlay{
     position:absolute;
     bottom:10px;
     left:10px;
     z-index:2;
-  }
+}
 
-  .video-overlay h3{
-    font-size:0.9rem;
-  }
-
+.video-overlay h3{
+    color:white;
+    font-size:0.85rem;
+}
   /* REMOVE BLACK SPACE */
   .video-card::before,
   .video-card::after{
